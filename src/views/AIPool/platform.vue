@@ -1,9 +1,7 @@
 <template>
-  <a-layout-sider>
-    <div>
-      smenu
-    </div>
-  </a-layout-sider>
+  <div>
+    云平台服务
+  </div>
 </template>
 
 <script>

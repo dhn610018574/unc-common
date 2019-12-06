@@ -19,6 +19,5 @@ export default {
 <style lang="less">
 .globalContent {
   height: 100%;
-  overflow-y: auto;
 }
 </style>

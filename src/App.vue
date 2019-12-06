@@ -1,7 +1,11 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+  <a-locale-provider :locale="locale">
+    <a-config-provider :getPopupContainer="triggerNode => triggerNode.parentNode">
+      <div id="app">
+        <router-view />
+      </div>
+    </a-config-provider>
+  </a-locale-provider>
 </template>
 
 <style lang="less">
@@ -12,9 +16,10 @@
   text-align: center;
   height: 100%;
 }
-body {
+body,
+html {
   overflow: hidden;
-  min-height: 100%;
+  min-height: 100vh;
   height: 100%;
   width: 100%;
   min-width: 1080px;
