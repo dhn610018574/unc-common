@@ -44,7 +44,6 @@ export default {
   },
   methods: {
     updateMenu() {
-      console.log(this.$route.path)
       this.isHome = this.$route.path === '/home'
       const menuList = this.$store.state.user.menuList
       const currentParent = findParent(menuList, this.$route.meta.parentId)
