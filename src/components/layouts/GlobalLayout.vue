@@ -8,7 +8,7 @@
       </a-layout-sider>
       <a-layout>
         <Breadcrumb :title="$route.name" v-show="!isHome" />
-        <a-layout-content>
+        <a-layout-content style="background-color: #fff;">
           <slot />
         </a-layout-content>
       </a-layout>
