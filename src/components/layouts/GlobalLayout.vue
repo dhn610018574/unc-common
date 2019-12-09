@@ -2,12 +2,12 @@
   <a-layout class="layout">
     <Golbal-header :menus="topMenus" />
     <a-layout>
-      <a-layout-sider class="slider">
-        <h4 class="sider-header">{{ breadTitle }}</h4>
+      <a-layout-sider class="slider" v-show="!isHome">
+        <h4 class="sider-header">{{ menuParent }}</h4>
         <s-menu :menu="menus" />
       </a-layout-sider>
       <a-layout>
-        <Breadcrumb :title="$route.name" />
+        <Breadcrumb :title="$route.name" v-show="!isHome" />
         <a-layout-content>
           <slot />
         </a-layout-content>
@@ -19,17 +19,39 @@
 import GolbalHeader from '@/components/tools/GolbalHeader'
 import Breadcrumb from '@/components/tools/Breadcrumb'
 import SMenu from '@/components/menu'
+import { findParent } from '@/utils/util'
 export default {
   components: {
     GolbalHeader,
     Breadcrumb,
     SMenu
   },
+  watch: {
+    $route(val) {
+      this.isHome = val.path === '/home'
+      this.updateMenu()
+    }
+  },
   data() {
     return {
-      breadTitle: '',
+      menuParent: '',
       menus: [],
-      topMenus: []
+      topMenus: [],
+      isHome: false
+    }
+  },
+  mounted() {
+    this.updateMenu()
+  },
+  methods: {
+    updateMenu() {
+      const menuList = this.$store.state.user.menuList
+      const currentParent = findParent(menuList, this.$route.meta.parentId)
+      if (currentParent) {
+        this.menus = currentParent.children || []
+        this.menuParent = currentParent.name
+      }
+      this.topMenus = menuList
     }
   }
 }
@@ -57,6 +79,9 @@ export default {
   .ant-menu-inline .ant-menu-item-selected::after {
     border: 0;
   }
+  .ant-menu-item-selected > a {
+    color: #666;
+  }
 }
 .sider-header {
   height: 56px;
@@ -64,7 +89,7 @@ export default {
   font-size: 14px;
   padding-left: 20px;
   margin: 0;
-  font-weight: 600;
+  font-weight: 700;
   background-color: #a6b8ce;
   text-align: left;
 }

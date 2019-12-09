@@ -29,7 +29,7 @@ const user = {
           }
 
           const menus = generateIndexRouter(menuData)
-          commit('SET_MENU_LIST', menus[0]['children'].slice(1))
+          commit('SET_MENU_LIST', menus[0]['children'])
           resolve(menus)
         })
       })

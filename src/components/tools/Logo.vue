@@ -36,10 +36,10 @@
   }
 
   h1 {
-    color: #fff;
+    color: #ffffff;
     font-size: 18px;
     margin: 0 0 0 8px;
-    font-weight: 600;
+    font-weight: 700;
   }
 }
 </style>

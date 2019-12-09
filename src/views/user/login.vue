@@ -64,7 +64,7 @@ export default {
   min-width: 1200px;
   background: #f6f8fb url('~@/assets/images/login_bg.png') repeat-y top right;
   background-repeat: repeat-y;
-  background-size: 31% 100%;
+  background-size: 35% 100%;
   background-position: 100% 0;
 }
 
@@ -163,9 +163,11 @@ export default {
     }
   }
 }
-
+.main /deep/ .ant-tabs-nav{
+  margin-left: 30%;
+}
 .main /deep/ .ant-tabs-nav .ant-tabs-tab-active {
-  font-weight: 500;
+  font-weight: 400;
   font-size: 18px;
   color: #2468f2;
 }

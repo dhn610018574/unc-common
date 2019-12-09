@@ -41,7 +41,9 @@ export const randomLenNum = (len, date) => {
   if (date) random = random + Date.now()
   return random
 }
-
+/**
+ * 比较2个对象的大小
+ */
 export function compare(propertyName) {
   return function(object1, object2) {
     var value1 = object1[propertyName]
@@ -54,21 +56,6 @@ export function compare(propertyName) {
       return 0
     }
   }
-}
-
-export const getParentKey = (key, tree) => {
-  let parentKey
-  for (let i = 0; i < tree.length; i++) {
-    const node = tree[i]
-    if (node.children) {
-      if (node.children.some(item => item.key === key)) {
-        parentKey = node.key
-      } else if (getParentKey(key, node.children)) {
-        parentKey = getParentKey(key, node.children)
-      }
-    }
-  }
-  return parentKey
 }
 
 /**
@@ -110,7 +97,15 @@ export function generateIndexRouter(data) {
       redirect: '/home',
       children: [
         {
+          children: [],
           path: '/home',
+          name: '首页',
+          meta: {
+            icon: 'home',
+            id: -1,
+            parentId: -1,
+            title: '首页'
+          },
           component: resolve => require(['@/views/home/index'], resolve)
         },
         ...generateChildRouters(data)
@@ -197,4 +192,27 @@ export function handleImg(url, id) {
         const img = document.getElementById(id)
         img.src = avator
       })
+}
+/**
+ * 递归寻找子类的父类
+ * parentId: 子类的parentId
+ */
+
+export const findParent = (menu, parentId) => {
+  for (let i = 0; i < menu.length; i++) {
+    if (menu[i].meta.id === parentId) {
+      return menu[i]
+    }
+    if (menu[i].children && menu[i].children.length !== 0) {
+      for (let j = 0; j < menu[i].children.length; j++) {
+        if (menu[i].children[j].meta.id === parentId) {
+          return menu[i]
+        } else {
+          if (menu[i].children[j].children && menu[i].children[j].children.length !== 0) {
+            return findParent(menu[i].children[j].children, parentId)
+          }
+        }
+      }
+    }
+  }
 }

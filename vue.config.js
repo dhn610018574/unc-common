@@ -27,12 +27,20 @@ module.exports = {
   devServer: {
     port: 8899,
     hot: true,
+    open: true,
     proxy: {
       '/admin': {
         target: url,
         ws: true,
         pathRewrite: {
           '^/admin': '/admin'
+        }
+      },
+      '/auth': {
+        target: url,
+        ws: true,
+        pathRewrite: {
+          '^/auth': '/auth'
         }
       }
     }
