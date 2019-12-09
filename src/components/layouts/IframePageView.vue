@@ -1,11 +1,5 @@
 <template>
-  <iframe
-    :id="id"
-    :src="url"
-    frameborder="0"
-    scrolling="auto"
-    class="iframe"
-  ></iframe>
+  <iframe :id="id" :src="url" frameborder="0" scrolling="auto" class="iframe"></iframe>
 </template>
 
 <script>
@@ -43,9 +37,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .iframe {
-    height: 100%;
-    width: 100%;
-    display: block;
-  }
+.iframe {
+  height: 100%;
+  width: 100%;
+  display: block;
+}
 </style>
